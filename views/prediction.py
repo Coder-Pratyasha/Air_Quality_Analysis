@@ -1,3 +1,4 @@
+
 import pandas as pd
 import streamlit as st
 
@@ -241,7 +242,6 @@ def show_prediction(df, model):
             )
 
         pollutant_values = {
-
             "PM10": pm10,
             "NO": no,
             "NO2": no2,
@@ -340,34 +340,48 @@ def show_prediction(df, model):
                 input_data
             )
 
-            # ------------------------------------------------
-            # RESULT
-            # ------------------------------------------------
+            # =================================================
+            # PREDICTED TIMESTAMP
+            # =================================================
 
-            st.markdown(
-                f"""
-                <div class="prediction-card">
-
-                    <div class="prediction-label">
-                        Predicted Next-Hour PM2.5
-                    </div>
-
-                    <div class="prediction-value">
-                        {prediction:.2f} µg/m³
-                    </div>
-
-                    <div class="prediction-label">
-                        {city} • {selected_timestamp}
-                    </div>
-
-                </div>
-                """,
-                unsafe_allow_html=True
+            predicted_timestamp = (
+                selected_timestamp
+                + pd.Timedelta(hours=1)
             )
 
-            st.caption(
-                "The model predicts PM2.5 for the hour "
-                "following the selected observation."
+            # =================================================
+            # RESULT
+            # =================================================
+
+            st.success(
+                "Prediction completed successfully!"
+            )
+
+            st.markdown(
+                "### 🌫️ Predicted Next-Hour PM2.5"
+            )
+
+            col1, col2 = st.columns(2)
+
+            with col1:
+
+                st.metric(
+                    "Predicted PM2.5",
+                    f"{prediction:.2f} µg/m³"
+                )
+
+            with col2:
+
+                st.metric(
+                    "Predicted For",
+                    predicted_timestamp.strftime(
+                        "%Y-%m-%d %H:%M"
+                    )
+                )
+
+            st.info(
+                f"📍 {city} • Prediction for the hour "
+                f"following the selected observation."
             )
 
         except Exception as e:
