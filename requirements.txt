@@ -6,4 +6,5 @@ xgboost
 joblib
 sqlalchemy
 pymysql
+python-dotenv
 matplotlib
