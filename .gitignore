@@ -1,7 +1,11 @@
+.env
 venv/
 .venv/
 __pycache__/
 *.pyc
-.env
-.idea/
-.vscode/
+
+data/city_hour.csv
+data/cleaned_air_quality.csv
+data/model_data.csv
+data/train.csv
+data/test.csv
