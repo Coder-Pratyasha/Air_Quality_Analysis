@@ -5,7 +5,6 @@ __pycache__/
 *.pyc
 
 data/city_hour.csv
-data/cleaned_air_quality.csv
 data/model_data.csv
 data/train.csv
 data/test.csv
